@@ -5,54 +5,61 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AsyncWaitSamples
+namespace AsyncAwaitSnippets
 {
     class Program
     {
         static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
-
+            
             // Fire and Forget the 'async' method ComputeSomeAsync just for fun
             // Note: Any exception that occures inside method 'ComputeSomeAsync' can only be caught in the 'UnhandledException' hander of the current AppDomain.
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            var computeTask = ComputeSomeAsync(async (number) =>
+            var computeTask = ComputeSomethingAsync(async (number) =>
             {
                 int doubled = number * 2;
                 await Task.Delay(500 * doubled); // simulate external I/O operation
-                System.Diagnostics.Debug.WriteLine($"In continuation of calculateFunc for number:{doubled} in thread:{Thread.CurrentThread.ManagedThreadId}");
+
+                //continue here on 'Delay' Task completion
+                Log($"ComputeSomeAsync: In continuation of calculateFunc for number:{doubled} in thread:{Thread.CurrentThread.ManagedThreadId}");
                 return doubled;
             });
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
-            System.Diagnostics.Debug.WriteLine($"Main Thread other work finished. Waiting for ComputeSomeAsync to complete in thread:{Thread.CurrentThread.ManagedThreadId}");
+            Log($"Main Thread: Waiting for ComputeSomeAsync to complete in thread:{Thread.CurrentThread.ManagedThreadId}");
 
             while (!computeTask.IsCompleted)
             {
-                System.Diagnostics.Debug.WriteLine("Do some main work.");
-                Thread.Sleep(10);
+                Log($"Main Thread: Do some main work... in thread:{Thread.CurrentThread.ManagedThreadId}");
+                Thread.Sleep(2000);
             }
-            
-            System.Diagnostics.Debug.WriteLine($"Main Thread other work finished");
+
+            Log($"Main Thread: Work finished");
             Console.ReadLine();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Console.WriteLine(e.ExceptionObject);
+            Log(e.ExceptionObject.ToString());
         }
 
-        private static async Task ComputeSomeAsync(Func<int, Task<int>> calculateFunc)
+        private static async Task ComputeSomethingAsync(Func<int, Task<int>> calculateFunc)
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 7; i++)
             {
                 int result = await calculateFunc(i);
-                System.Diagnostics.Debug.WriteLine($"In continuation of ComputeSomeAsync for result:{ result} in thread:{Thread.CurrentThread.ManagedThreadId}");
+                Log($"ComputeSomeAsync: In continuation of ComputeSomeAsync for result:{ result} in thread:{Thread.CurrentThread.ManagedThreadId}");
             }
 
-            System.Diagnostics.Debug.WriteLine("ComputeSomeAsync finished");
+            Log("ComputeSomeAsync: Work finished");
+        }
+
+        private static void Log(string message)
+        {
+            Console.WriteLine(message);
+            System.Diagnostics.Debug.WriteLine(message);
         }
 
     }

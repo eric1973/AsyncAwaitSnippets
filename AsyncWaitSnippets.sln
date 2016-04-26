@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncWaitFireAndForget", "AsyncWaitSamples\AsyncWaitFireAndForget.csproj", "{850510F3-F93B-40AC-978E-418C395C8B74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintAnswerToLife", "PrintAnswerToLife\PrintAnswerToLife\PrintAnswerToLife.csproj", "{DBA743BD-6164-448B-9746-3742BE12681D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{850510F3-F93B-40AC-978E-418C395C8B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{850510F3-F93B-40AC-978E-418C395C8B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{850510F3-F93B-40AC-978E-418C395C8B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{850510F3-F93B-40AC-978E-418C395C8B74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA743BD-6164-448B-9746-3742BE12681D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA743BD-6164-448B-9746-3742BE12681D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA743BD-6164-448B-9746-3742BE12681D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA743BD-6164-448B-9746-3742BE12681D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

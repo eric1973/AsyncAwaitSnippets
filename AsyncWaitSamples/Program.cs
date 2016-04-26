@@ -36,7 +36,6 @@ namespace AsyncWaitSamples
             }
             
             System.Diagnostics.Debug.WriteLine($"Main Thread other work finished");
-            
             Console.ReadLine();
         }
 
